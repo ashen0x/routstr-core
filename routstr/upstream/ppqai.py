@@ -377,34 +377,6 @@ class PPQAIUpstreamProvider(BaseUpstreamProvider):
 
                     await reinitialize_upstreams()
 
-    async def create_account(self) -> dict[str, object]:
-        """Create a new PPQ.AI account.
-
-        Returns:
-            Dict containing 'credit_id' and 'api_key' for the new account.
-
-        Raises:
-            httpx.HTTPStatusError: If the API request fails.
-        """
-        url = f"{self.base_url}/accounts/create"
-
-        logger.info("Creating new PPQ.AI account", extra={"url": url})
-
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(url)
-            response.raise_for_status()
-            account_data = response.json()
-
-            logger.info(
-                "Successfully created PPQ.AI account",
-                extra={
-                    "credit_id": account_data.get("credit_id"),
-                    "has_api_key": bool(account_data.get("api_key")),
-                },
-            )
-
-            return account_data
-
     async def create_lightning_topup(
         self, amount: int, currency: str
     ) -> dict[str, object]:

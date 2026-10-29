@@ -8,7 +8,7 @@ import time
 from datetime import datetime, timezone
 from typing import Any
 
-from pydantic.v1 import BaseModel, BaseSettings, Field
+from pydantic.v1 import BaseSettings, Field
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 # Mints a fresh node trusts out of the box, shared by the settings default and
@@ -453,12 +453,6 @@ def resolve_bootstrap() -> Settings:
     if not base.primary_mint:
         base.primary_mint = _compute_primary_mint(base.cashu_mints)
     return base
-
-
-class SettingsRow(BaseModel):
-    id: int
-    data: dict[str, Any]
-    updated_at: datetime | None = None
 
 
 # Single, concrete settings instance that callers import directly

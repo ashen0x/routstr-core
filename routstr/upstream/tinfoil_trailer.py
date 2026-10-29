@@ -50,14 +50,6 @@ class TrailerResponse:
     trailers: list[tuple[str, str]] = field(default_factory=list)
 
 
-def _get_header(headers: list[tuple[str, str]], name: str) -> str | None:
-    name_lower = name.lower()
-    for k, v in headers:
-        if k.lower() == name_lower:
-            return v
-    return None
-
-
 def _strip_hop_by_hop_headers(headers: dict[str, str]) -> dict[str, str]:
     """Remove connection-specific headers before serializing a new request."""
     connection_tokens: set[str] = set()

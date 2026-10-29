@@ -763,14 +763,6 @@ async def _persist_routstr_token_and_mark_sent(
         await session.commit()
 
 
-async def _current_routstr_claim(row: UpstreamProviderRow) -> RoutstrClaim | None:
-    async with create_session() as session:
-        transaction = await session.get(CashuTransaction, _routstr_state_id(row))
-    if transaction is None:
-        return None
-    return _parse_routstr_request_id(transaction.request_id)
-
-
 async def _reconcile_routstr_state(
     row: UpstreamProviderRow, provider: RoutstrUpstreamProvider
 ) -> bool:

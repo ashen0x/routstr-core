@@ -252,14 +252,3 @@ async def test_fetch_models_returns_list() -> None:
     except Exception:
         pass  # May fail without network
 
-
-# ===========================================================================
-# create_account
-# ===========================================================================
-
-@pytest.mark.asyncio
-async def test_create_account_raises_not_implemented() -> None:
-    """Default create_account raises NotImplementedError."""
-    p = BaseUpstreamProvider("https://api.test.com", "sk-test")
-    with pytest.raises(NotImplementedError):
-        await p.create_account()

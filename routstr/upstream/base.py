@@ -6375,19 +6375,6 @@ class BaseUpstreamProvider:
             f"Provider {cls.provider_type} does not support account creation"
         )
 
-    async def create_account(self) -> dict[str, object]:
-        """Create a new account with the provider.
-
-        Returns:
-            Dict with account creation details including api_key
-
-        Raises:
-            NotImplementedError: If provider does not support account creation
-        """
-        raise NotImplementedError(
-            f"Provider {self.provider_type} does not support account creation"
-        )
-
     async def initiate_topup(self, amount: int) -> TopupData:
         """Initiate a Lightning Network top-up for the provider account.
 
